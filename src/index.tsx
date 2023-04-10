@@ -1,15 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter } from "react-router-dom";
+import { RecoilRoot } from "recoil";
+
+import "@src/assets/styles/global.css";
+
+import { generateQueryClient } from "@src/config/query";
+
+import App from "@src/App";
+
+import reportWebVitals from "@src/reportWebVitals";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={generateQueryClient()}>
+      <RecoilRoot>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </RecoilRoot>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
